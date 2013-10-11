@@ -1,0 +1,36 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+int reverse(int rev)
+{
+    // rev will always be positive, so no need to worry about special cases
+    int dig = int(log10(rev));
+    int reversed = 0;
+    for (int i = dig; i > -1; i--)
+    {
+        int rank = 0;
+        while(rev > pow(10, i) - 1)
+        {
+            rev -= pow(10, i);
+            rank += 1;
+        }
+        // add the number to help find the reversed number
+        reversed += rank * pow(10, dig - i);
+    }
+    return reversed;
+}
+
+int main()
+{
+    int number, x, y;
+
+    cin >> number;
+
+    for (int i = 0; i < number; i++)
+    {
+        cin >> x >> y;
+        cout << reverse(reverse(x) + reverse(y)) << endl;
+    }
+}
+
